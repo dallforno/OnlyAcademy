@@ -35,7 +35,6 @@ const ProfileScreen = ({ navigation }) => {
           </View>
         </ImageBackground>
       </View>
-
       <View style={styles.profileDetail}>
         <View style={[styles.detailContent, { paddingRight: 10, marginRight: 5, borderRightWidth: 2, borderRightColor: "#fff" }]}>
           <Text style={styles.count}>2.390</Text>
@@ -46,7 +45,6 @@ const ProfileScreen = ({ navigation }) => {
           <Text style={styles.title}>Seguindo</Text>
         </View>
       </View>
-
       <View style={styles.body}>
         <View style={styles.bodyContent}>
           <View style={styles.buttonContainer}>

@@ -10,10 +10,9 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{ headerShown: false }} initialRouteName='Camera'>
+        screenOptions={{ headerShown: false }} initialRouteName='Profile'>
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Camera" component={Camera} />
-
       </Stack.Navigator>
     </NavigationContainer>
   )
