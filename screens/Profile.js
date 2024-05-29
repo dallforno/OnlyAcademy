@@ -11,10 +11,17 @@ import {
   Image,
 } from "react-native";
 
+import Camera from "./Camera"; // Verifique o caminho do arquivo da câmera
+
 const image = require('../assets/capa.jpg');
-  
 
 const ProfileScreen = ({ navigation }) => {
+
+  const handleOpenCamera = () => {
+    navigation.navigate('Camera'); // Supondo que 'Camera' seja o nome da rota para a tela da câmera
+  };
+
+
   return (
     <ScrollView>
       <View style={styles.header}>
@@ -64,15 +71,27 @@ const ProfileScreen = ({ navigation }) => {
                 Direct
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity style={[styles.buttonTwo, { marginLeft: 10 }]} onPress={handleOpenCamera}>
+              <Text style={styles.buttonTwoText}>
+                <Ionicons
+                  name="camera-outline"
+                  size={18}
+                  style={{ color: "#000" }}
+                />{" "}
+                Câmera
+              </Text>
+            </TouchableOpacity>
+
           </View>
           <View style={styles.background}>
             <Text style={styles.headline_text}>Fotos</Text>
             <View style={styles.imagesGrid}>
               <GridImageView
                 data={[
-                 "https://img.freepik.com/fotos-gratis/um-lobo-colorido-com-um-fundo-preto_1340-40203.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1715558400&semt=sph",
-                 "https://static.vecteezy.com/ti/fotos-gratis/t1/10468057-retrato-de-onca-gratis-foto.jpg",
-                 "https://s2-g1.glbimg.com/1T8I3Ld4Gi5hXCYgmUp-Ah78vLU=/0x0:1437x1690/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/4/B/xGq6UURMKb0l2NnbuWVw/00-poty1-ivan-silva-mexico.jpg"
+                  "https://img.freepik.com/fotos-gratis/um-lobo-colorido-com-um-fundo-preto_1340-40203.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1715558400&semt=sph",
+                  "https://static.vecteezy.com/ti/fotos-gratis/t1/10468057-retrato-de-onca-gratis-foto.jpg",
+                  "https://s2-g1.glbimg.com/1T8I3Ld4Gi5hXCYgmUp-Ah78vLU=/0x0:1437x1690/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/4/B/xGq6UURMKb0l2NnbuWVw/00-poty1-ivan-silva-mexico.jpg"
+
                 ]}
               />
             </View>
