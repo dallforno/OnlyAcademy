@@ -5,6 +5,7 @@ import ProfileScreen from '../screens/Profile';
 import Camera from '../screens/Camera';
 import Pagamento from "../screens/Pagamento";
 
+
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
