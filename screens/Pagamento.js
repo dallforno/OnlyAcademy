@@ -93,22 +93,25 @@ export default function Pagamento() {
             <View style={styles.statusBarBackground} />
             <StatusBar barStyle='dark-content' backgroundColor='#FBBA25' translucent />
             <View style={styles.header}>
-                <Text style={styles.headerText}>Escolha um Plano!</Text>
+                <Text style={styles.headerText}>Assinaturas disponíveis:</Text>
             </View>
             <View style={styles.optionsContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.optionButton}>
                     <View style={styles.optionContent}>
                         <Text style={styles.optionText}>Plano FREE</Text>
+                        <Text style={styles.optionValue}>Sem Cobranças</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleIntegracaoMensal} style={styles.optionButton}>
                     <View style={styles.optionContent}>
                         <Text style={styles.optionText}>Plano Mensal</Text>
+                        <Text style={styles.optionValue}>R$ 24,99</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleIntegracaoAnual} style={styles.optionButton}>
                     <View style={styles.optionContent}>
                         <Text style={styles.optionText}>Plano Anual</Text>
+                        <Text style={styles.optionValue}>R$ 204,00</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     statusBarBackground: {
-        backgroundColor: '#CCC',
+        backgroundColor: '#fff',
         height: Constants.statusBarHeight,
     },
     header: {
@@ -131,17 +134,20 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#1656AD',
         marginTop: 13,
+        textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 32,
     },
     optionsContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 200,
+        marginTop: 100,
         gap: 15,
     },
     optionButton: {
-        backgroundColor: '#ccc',
+        backgroundColor: '#f1f1f1',
+        borderColor: '#1656AD',
+        borderWidth: 2,
         width: 350,
         height: 100,
         borderRadius: 20,
@@ -154,5 +160,10 @@ const styles = StyleSheet.create({
     optionText: {
         fontSize: 20,
         fontWeight: 'bold',
+    },
+    optionValue: {
+        fontSize: 15,
+        marginTop: 5,
+        fontWeight: "600",
     },
 });
