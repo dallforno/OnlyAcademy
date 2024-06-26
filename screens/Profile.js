@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import GridImageView from "react-native-grid-image-viewer";
 import {
   View,
   ScrollView,
@@ -9,18 +8,43 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  FlatList
 } from "react-native";
 
 import Camera from "./Camera"; // Verifique o caminho do arquivo da câmera
+import { getImagesFromSupabase } from "../api"; // Importe a função para buscar imagens do Supabase
+
 
 const image = require('../assets/capa.jpg');
 
 const ProfileScreen = ({ navigation }) => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    fetchImages(); // Carregar imagens ao montar o componente
+  }, []);  
+
+  const fetchImages = async () => {
+    try {
+      const imagesData = await getImagesFromSupabase(); // Função para buscar imagens do Supabase
+      console.log("Imagens do Supabase:", imagesData); // Adicione este console.log para verificar os dados recebidos
+      setImages(imagesData); // Atualiza o estado com os dados recebidos
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      // Trate o erro conforme necessário
+    }
+  };
 
   const handleOpenCamera = () => {
     navigation.navigate('Camera'); // Supondo que 'Camera' seja o nome da rota para a tela da câmera
   };
 
+  const renderItem = ({ item }) => (
+    <Image
+      source={{ uri: item.image_url }}
+      style={styles.imageItem}
+    />
+  );
 
   return (
     <ScrollView>
@@ -85,16 +109,13 @@ const ProfileScreen = ({ navigation }) => {
           </View>
           <View style={styles.background}>
             <Text style={styles.headline_text}>Fotos</Text>
-            <View style={styles.imagesGrid}>
-              <GridImageView
-                data={[
-                  "https://img.freepik.com/fotos-gratis/um-lobo-colorido-com-um-fundo-preto_1340-40203.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1715558400&semt=sph",
-                  "https://static.vecteezy.com/ti/fotos-gratis/t1/10468057-retrato-de-onca-gratis-foto.jpg",
-                  "https://s2-g1.glbimg.com/1T8I3Ld4Gi5hXCYgmUp-Ah78vLU=/0x0:1437x1690/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/4/B/xGq6UURMKb0l2NnbuWVw/00-poty1-ivan-silva-mexico.jpg"
-
-                ]}
-              />
-            </View>
+            <FlatList
+              data={images}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id.toString()}
+              numColumns={3}
+              style={styles.imagesGrid}
+            />
           </View>
         </View>
       </View>
@@ -216,6 +237,11 @@ const styles = StyleSheet.create({
   imagesGrid: {
     flex: 1,
     width: 350,
+  },
+  imageItem: {
+    width: 100,
+    height: 100,
+    margin: 5,
   },
 });
 
